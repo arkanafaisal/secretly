@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique @db.VarChar(20)
+  email         String?   @unique @db.VarChar(254)
+  password      String    @db.Char(60)
+  publicId      String    @unique @db.VarChar(21)
+  allowMessages Boolean   @default(true)
+  avatarIndex   Int       @default(0)
+  bio           String?   @db.VarChar(120)
+  messages      Message[]
+  createdAt     DateTime  @default(now())
+}
+
+model Message {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  hint      String    @db.VarChar(20) @default("anonym")
+  message   String    @db.VarChar(300)
+  read      Boolean   @default(false)
+  starred   Boolean   @default(false)
+  user      User      @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
+}

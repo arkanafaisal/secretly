@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Anda dapat menambahkan kustomisasi variabel tema Tailwind v4 di blok ini jika diperlukan nantinya
+  @theme {
+    --color-primary: var(--color-rose-500);
+  }
+*/
+
+@layer base {
+  :root {
+    /* Memberi tahu browser (Chrome) untuk menyesuaikan elemen bawaan dengan sistem terang/gelap */
+    color-scheme: light dark;
+  }
+  
+  /* Memberikan warna dasar global agar tidak perlu diulang di setiap div halaman */
+  body {
+    @apply bg-zinc-50 text-zinc-900 transition-colors duration-300 antialiased;
+  }
+
+  /* Tailwind v4 menangani modifier dark: secara otomatis via prefers-color-scheme.
+     Namun untuk base body, kita definisikan ulang di sini jika diperlukan */
+  @media (prefers-color-scheme: dark) {
+    body {
+      @apply bg-zinc-950 text-zinc-100;
+    }
+  }
+}
+/* ... kode css Anda sebelumnya (misal: @tailwind base, dll) ... */
+
+/* Menyembunyikan semua scrollbar default hanya pada perangkat mobile */
+@media (max-width: 767px) {
+  *::-webkit-scrollbar {
+    display: none !important;
+  }
+  * {
+    -ms-overflow-style: none !important; /* IE dan Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+}
+button {
+    cursor: pointer;
+}
