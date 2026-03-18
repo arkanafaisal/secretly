@@ -8,9 +8,9 @@ export async function create({ publicId, message, hint }) {
             data: {
                 message,
                 hint: hint?? undefined,
-                user: { connect: {publicId} },
-                select: { userId: true }
-            }
+                user: { connect: {publicId} }
+            },
+            select: { userId: true }
         })
         return userId
         
