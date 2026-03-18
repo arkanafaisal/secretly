@@ -35,7 +35,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "../frontend/dist")))
-app.use((req, res) => {
+app.use((req, res, next) => {
   if (req.path.startsWith('/api')) return next()
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });

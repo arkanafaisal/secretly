@@ -7,6 +7,15 @@ ideas:
 - response message handler
 - replace alert
 - messages query limit + pagination
+- express-async-handler
+- unit testing
+- logging
+- joi invalid message formatting
+- api documentation
+- /health endpoint
+- try docker
+- env validation (envalid)
+
 
 
 implemented:
